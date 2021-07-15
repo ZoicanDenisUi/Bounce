@@ -16,6 +16,12 @@
 #startButton{
     display:block;
     margin:1rem auto;
+    width:4rem
+}
+
+.circle{
+    border-radius: 100%;
+    position: absolute;
 }
 
 .circle{
