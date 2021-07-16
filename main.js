@@ -19,9 +19,7 @@ document.getElementById("startButton").addEventListener("click", function(){
     const circleRadius = 40
     newDiv.style.width=circleRadius+"px"
     newDiv.style.height=circleRadius+"px"
-    newDiv.style.backgroundColor="red"
-    newDiv.style.borderRadius="100%"
-    newDiv.style.position="absolute"
+    newDiv.classList.add("circle")
     newDiv.style.left=(leftBounceDiv+randomIntFromInterval(0,diffRightLeft-circleRadius))+"px"
     newDiv.style.top=(topBounceDiv+randomIntFromInterval(0,difTopBottom-circleRadius))+"px"
 
@@ -33,7 +31,7 @@ document.getElementById("startButton").addEventListener("click", function(){
 
 
 // Animation 
-  var bounceAnimation = [
+  const bounceAnimation = [
     {color: 'coral'},
     {color: 'rgb(250, 238, 76)', transform: 'translateX(-45px) translateY(25px)'},
     {color: 'rgb(61, 236, 114)', transform: 'translateX(45px) translateY(25px)'},

@@ -18,6 +18,13 @@
     margin:1rem auto;
 }
 
+.circle{
+    background-color: red;
+    border-radius: 100%;
+    position:absolute
+}
+
+
 #bounceDiv{
     border:1px solid #d3d3d3;
     width:80%;
