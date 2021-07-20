@@ -1,122 +1,45 @@
-import {randomIntFromInterval} from './Helpers/mathHelper.js'
-
+import {Circle} from './DomClasses/circle.js'
+import { scaleDownCircle,moveCircle } from './DomClasses/domInteractions.js'
 // Start button logic
 
 const startWrapper = (function(){
 
-    let buttonState = false
+    let createBalls = true
     let bounceInterval 
     let circlesElements = []
-    let bounceDiv = document.getElementById("bounceDiv");
+    let bounceDiv = document.getElementById("bounceDiv")
+    let ballCountInput = document.getElementById("ballCountInput")
 
-    function createCircle(){
-
-        const gradientDirection = randomIntFromInterval(0,360)
-        
-        const colorRed1 = randomIntFromInterval(0,255)
-        const colorGreen1 = randomIntFromInterval(0,255)
-        const colorBlue1 = randomIntFromInterval(0,255)
-
-        const colorRed2 = randomIntFromInterval(0,255)
-        const colorGreen2 = randomIntFromInterval(0,255)
-        const colorBlue2 = randomIntFromInterval(0,255)
-
-    const newDiv = document.createElement("div");
-    newDiv.classList.add("circle")
-    const circleRadius = randomIntFromInterval(40,100)
-    newDiv.style.width=circleRadius+"px"
-    newDiv.style.height=circleRadius+"px"
-    newDiv.style.backgroundImage = `linear-gradient(${gradientDirection}deg, rgba(${colorRed1},${colorGreen1},${colorBlue1}), rgba(${colorRed2},${colorGreen2},${colorBlue2}))`
-
-    return newDiv
-    }
     
     return function(){
         document.getElementById("startButton").addEventListener("click", function(){
-            if(!buttonState){
+            if(createBalls){
                 this.innerText = "Stop"
-                let ballsNumber = parseInt(document.getElementById("ballCountInput").value)
+                let ballsNumber = parseInt(ballCountInput.value)
         
-                let {top:topBounceDiv,left:leftBounceDiv,bottom:bottomBounceDiv,right:rightBounceDiv} = bounceDiv.getBoundingClientRect();
-        
-                let diffRightLeft = rightBounceDiv-leftBounceDiv
-                let difTopBottom = bottomBounceDiv - topBounceDiv
-        
+                let {width:widthBounceDiv,height:heightBounceDiv,left:leftBounceDiv,top:topBounceDiv} = bounceDiv.getBoundingClientRect();
+                
                 for(let i=0;i<ballsNumber;i++){
-
-                    let newDiv = createCircle()
-                    let xCoord = (leftBounceDiv+randomIntFromInterval(0,diffRightLeft-parseInt(newDiv.style.width)))
-                    let yCoord = (topBounceDiv+randomIntFromInterval(0,difTopBottom-parseInt(newDiv.style.width)))
-                    
-                    newDiv.style.left=xCoord+"px"
-                    newDiv.style.top=yCoord+"px"
-        
-                    circlesElements.push({
-                        dom:newDiv,
-                        x:xCoord,
-                        y:yCoord,
-                        step:randomIntFromInterval(1,10),
-                        direction:randomIntFromInterval(0,1),
-                        slope:Math.random()
-                    })
-                        bounceDiv.append(newDiv)
+                    let newCircle = new Circle(widthBounceDiv,heightBounceDiv,leftBounceDiv,topBounceDiv)
+                    circlesElements.push(newCircle)
+                    bounceDiv.append(newCircle.dom)
                 }
                 
         
                 bounceInterval = setInterval(()=>{
-                    console.log("Bounce interval")
                     let {top:topBounceDiv,left:leftBounceDiv,bottom:bottomBounceDiv,right:rightBounceDiv} = bounceDiv.getBoundingClientRect();
                     circlesElements.forEach((circle)=>{
-        
-                        let circleRadius = parseInt(circle.dom.style.width)
-                        let direction = circle.direction
-                        if(direction == 0){
-                            circle.x += circle.step
-                        } else {
-                            circle.x -= circle.step
-                        }
-        
-        
-                        circle.y += circle.slope*circle.step
-        
-                        if(circle.x > rightBounceDiv - circleRadius){ // Right
-                            circle.direction = (direction+1)%2
-                            circle.x = rightBounceDiv - circleRadius
-                        } else if (circle.x < leftBounceDiv){
-                            circle.direction = (direction+1)%2
-                            circle.x = leftBounceDiv
-                        }
-        
-                        if(circle.y > bottomBounceDiv - circleRadius){ // Right
-                            circle.slope *= -1;
-                            circle.y = bottomBounceDiv - circleRadius
-                            
-                        }  else if(circle.y < topBounceDiv){
-                            circle.slope *= -1;
-                            circle.y =  topBounceDiv
-                        }
-        
-                        circle.dom.style.left = circle.x+"px"
-                        circle.dom.style.top = circle.y+"px"
+                        moveCircle(circle,leftBounceDiv,rightBounceDiv,topBounceDiv,bottomBounceDiv)
                     })
-                },15)
-                buttonState = !buttonState
+                },16.6)
+                createBalls = !createBalls
             } else {
                 this.innerText = "Bounce"
                 clearInterval(bounceInterval)
                 let removeInterval = setInterval(function(){
-                    console.log("Remove interval")
-                    circlesElements.forEach((circle)=>{
-                        let newRadius = (parseInt(circle.dom.style.width)-2)+"px"
-                        circle.dom.style.width = newRadius
-                        circle.dom.style.height = newRadius
-                        circle.dom.style.left = (parseInt(circle.dom.style.left)+1)+"px"
-                        circle.dom.style.top = (parseInt(circle.dom.style.top)+1)+"px"
-                        console.log(circle.dom.style.left)
-                        console.log(circle.dom.style.top)
-                    })
+                    circlesElements.forEach(scaleDownCircle)
                     circlesElements = circlesElements.filter((circle)=>{
-                        if(parseInt(circle.dom.style.width) > 10)
+                        if(parseInt(circle.circleRadius) > 10)
                         {
                             return true;
                         } else {
@@ -126,11 +49,11 @@ const startWrapper = (function(){
                     })
         
                     if(!circlesElements.length){
-                        buttonState = !buttonState
+                        createBalls = !createBalls
                         clearInterval(removeInterval)
                     }
         
-                },10)
+                },16.6)
             }    
         });        
     }
@@ -139,14 +62,15 @@ const startWrapper = (function(){
 
 
 // Animation 
-  const bounceAnimation = [
-    {color: 'coral'},
-    {color: 'rgb(250, 238, 76)', transform: 'translateX(-45px) translateY(25px)'},
-    {color: 'rgb(61, 236, 114)', transform: 'translateX(45px) translateY(25px)'},
-    {color: 'rgb(58, 158, 204)', transform: 'translateX(45px) translateY(-25px)'},
-    {color: 'rgb(221, 56, 180)', transform: 'translateX(-45px) translateY(-25px)'},
-    {color: 'coral'}
-  ];
+const bounceAnimation = [
+{color: 'coral'},
+{color: 'rgb(250, 238, 76)', transform: 'translateX(-45px) translateY(25px)'},
+{color: 'rgb(61, 236, 114)', transform: 'translateX(45px) translateY(25px)'},
+{color: 'rgb(58, 158, 204)', transform: 'translateX(45px) translateY(-25px)'},
+{color: 'rgb(221, 56, 180)', transform: 'translateX(-45px) translateY(-25px)'},
+{color: 'coral'}
+];
+
 document.getElementById("title").addEventListener("click", function(){
     this.animate(bounceAnimation, {
         duration: 2000,
