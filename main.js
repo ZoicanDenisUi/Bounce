@@ -4,7 +4,7 @@ import { scaleDownCircle,moveCircle } from './DomClasses/domInteractions.js'
 
 const startWrapper = (function(){
 
-    let createBalls = true
+    let isStartButtonEnable = true
     let bounceInterval 
     let circlesElements = []
     let bounceDiv = document.getElementById("bounceDiv")
@@ -13,7 +13,7 @@ const startWrapper = (function(){
     
     return function(){
         document.getElementById("startButton").addEventListener("click", function(){
-            if(createBalls){
+            if(isStartButtonEnable){
                 this.innerText = "Stop"
                 let ballsNumber = parseInt(ballCountInput.value)
         
@@ -32,7 +32,7 @@ const startWrapper = (function(){
                         moveCircle(circle,leftBounceDiv,rightBounceDiv,topBounceDiv,bottomBounceDiv)
                     })
                 },16.6)
-                createBalls = !createBalls
+                isStartButtonEnable = !isStartButtonEnable
             } else {
                 this.innerText = "Bounce"
                 clearInterval(bounceInterval)
@@ -49,7 +49,7 @@ const startWrapper = (function(){
                     })
         
                     if(!circlesElements.length){
-                        createBalls = !createBalls
+                        isStartButtonEnable = !isStartButtonEnable
                         clearInterval(removeInterval)
                     }
         
