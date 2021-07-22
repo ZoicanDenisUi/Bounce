@@ -1,5 +1,5 @@
 import {Circle} from './DomClasses/circle.js'
-import { scaleDownCircle,moveCircle } from './DomClasses/domInteractions.js'
+import { removeCircleFromDom, addCircleToDom } from './DomClasses/domInteractions.js'
 // Start button logic
 
 const startWrapper = (function(){
@@ -10,6 +10,7 @@ const startWrapper = (function(){
     let bounceDiv = document.getElementById("bounceDiv")
     let ballCountInput = document.getElementById("ballCountInput")
 
+    const animationInterval = 16.6
     
     return function(){
         document.getElementById("startButton").addEventListener("click", function(){
@@ -22,28 +23,31 @@ const startWrapper = (function(){
                 for(let i=0;i<ballsNumber;i++){
                     let newCircle = new Circle(widthBounceDiv,heightBounceDiv,leftBounceDiv,topBounceDiv)
                     circlesElements.push(newCircle)
-                    bounceDiv.append(newCircle.dom)
+                    addCircleToDom(newCircle,bounceDiv)
                 }
                 
         
                 bounceInterval = setInterval(()=>{
                     let {top:topBounceDiv,left:leftBounceDiv,bottom:bottomBounceDiv,right:rightBounceDiv} = bounceDiv.getBoundingClientRect();
                     circlesElements.forEach((circle)=>{
-                        moveCircle(circle,leftBounceDiv,rightBounceDiv,topBounceDiv,bottomBounceDiv)
+                        circle.moveCircle(leftBounceDiv,rightBounceDiv,topBounceDiv,bottomBounceDiv)
                     })
-                },16.6)
+                },animationInterval)
                 isStartButtonEnable = !isStartButtonEnable
             } else {
                 this.innerText = "Bounce"
                 clearInterval(bounceInterval)
                 let removeInterval = setInterval(function(){
-                    circlesElements.forEach(scaleDownCircle)
+                    circlesElements.forEach((circle)=>{
+                        circle.scaleDown()
+                    
+                    })
                     circlesElements = circlesElements.filter((circle)=>{
-                        if(parseInt(circle.circleRadius) > 10)
+                        if(circle.circleRadius > 10)
                         {
                             return true;
                         } else {
-                            bounceDiv.removeChild(circle.dom)
+                            removeCircleFromDom(circle,bounceDiv)
                             return false;
                         }
                     })
@@ -53,7 +57,7 @@ const startWrapper = (function(){
                         clearInterval(removeInterval)
                     }
         
-                },16.6)
+                },animationInterval)
             }    
         });        
     }
