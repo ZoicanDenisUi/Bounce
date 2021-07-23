@@ -1,30 +1,33 @@
 import { randomIntFromInterval } from "../Helpers/mathHelper.js"
 
-export function updateCirclePositionInDom(circle,x,y){
-    circle.dom.style.left=x+"px"
-    circle.dom.style.top=y+"px"
+let parentDiv
 
-    circle.x = x
-    circle.y = y
+export function initialize(newDiv){
+    parentDiv = newDiv
 }
 
-export function addCircleToDom(circle,dom){
-    dom.append(circle.dom)
+export function updateCirclePositionInDom(circleDom,x,y){
+    circleDom.style.left=x+"px"
+    circleDom.style.top=y+"px"
 }
 
-export function removeCircleFromDom(circle,dom){
-    dom.removeChild(circle.dom)
+export function addCircleToDom(circleDom){
+    parentDiv.append(circleDom)
 }
 
-export function updateCircleRadiusInDom(circle,newRadius){
-    circle.dom.style.width = newRadius+"px"
-    circle.dom.style.height = newRadius+"px"
-    circle.circleRadius = newRadius
+export function removeCircleFromDom(circleDom){
+    parentDiv.removeChild(circleDom)
+}
+
+export function updateCircleRadiusInDom(circleDom,newRadius){
+    circleDom.style.width = newRadius+"px"
+    circleDom.style.height = newRadius+"px"
 }
 
 
-export function createCircleDomElement(circleRadius){
+export function createCircleDomElement(){
 
+    const circleRadius = randomIntFromInterval(40,100)
     const gradientDirection = randomIntFromInterval(0,360)
     
     const colorRed1 = randomIntFromInterval(0,255)

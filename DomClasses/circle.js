@@ -1,32 +1,35 @@
-import { createCircleDomElement, updateCirclePositionInDom, updateCircleRadiusInDom} from "./domInteractions.js"
 import { randomIntFromInterval } from "../Helpers/mathHelper.js"
 
 export class Circle {
-    constructor(width,height,left,top){
-        this.circleRadius = randomIntFromInterval(40,100)
-        this.x = left+randomIntFromInterval(0,width-this.circleRadius)
-        this.y = top+randomIntFromInterval(0,height-this.circleRadius)
+    constructor(dom,width,height,left,top){
         this.step = randomIntFromInterval(1,10),
         this.direction = randomIntFromInterval(0,1),
         this.slope = Math.random()
 
-        this.dom = createCircleDomElement(this.circleRadius)
+        this.dom = dom
+        this.circleRadius = parseInt(dom.style.width)
+
+        this.x = left+randomIntFromInterval(0,width-this.circleRadius)
+        this.y = top+randomIntFromInterval(0,height-this.circleRadius)
+
     }
 
     scaleDown(){
-        let newRadius = (this.circleRadius-2)
-        let newX = this.x+1
-        let newY = this.y+1
+        const newRadius = (this.circleRadius-2)
+        const newX = this.x+1
+        const newY = this.y+1
 
-        updateCircleRadiusInDom(this,newRadius)
-        updateCirclePositionInDom(this,newX,newY)
+        this.circleRadius = newRadius
+
+        this.x = newX
+        this.y = newY
         
     }
     moveCircle(left,right,top,bottom){
 
         // Calculate new x, y, slope and direction
-        let circleRadius = this.circleRadius
-        let direction = this.direction
+        const circleRadius = this.circleRadius
+        const direction = this.direction
         
         if(direction == 0){
             this.x += this.step
@@ -52,7 +55,5 @@ export class Circle {
             this.slope *= -1;
             this.y =  top
         }
-
-        updateCirclePositionInDom(this,this.x,this.y)
     }
   }

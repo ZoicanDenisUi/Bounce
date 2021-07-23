@@ -1,53 +1,58 @@
 import {Circle} from './DomClasses/circle.js'
-import { removeCircleFromDom, addCircleToDom } from './DomClasses/domInteractions.js'
+import { removeCircleFromDom, createCircleDomElement ,addCircleToDom, initialize,updateCirclePositionInDom,updateCircleRadiusInDom } from './DomClasses/domInteractions.js'
 // Start button logic
+
+initialize(document.getElementById("bounceDiv"))
 
 const startWrapper = (function(){
 
     let isStartButtonEnable = true
     let bounceInterval 
     let circlesElements = []
-    let bounceDiv = document.getElementById("bounceDiv")
-    let ballCountInput = document.getElementById("ballCountInput")
+    const bounceDiv = document.getElementById("bounceDiv")
+    const ballCountInput = document.getElementById("ballCountInput")
 
-    const animationInterval = 16.6
-    
+    const SIXTY_FPS = 1000/60
+
     return function(){
         document.getElementById("startButton").addEventListener("click", function(){
             if(isStartButtonEnable){
                 this.innerText = "Stop"
-                let ballsNumber = parseInt(ballCountInput.value)
+                const ballsNumber = parseInt(ballCountInput.value)
         
-                let {width:widthBounceDiv,height:heightBounceDiv,left:leftBounceDiv,top:topBounceDiv} = bounceDiv.getBoundingClientRect();
+                const {width:widthBounceDiv,height:heightBounceDiv,left:leftBounceDiv,top:topBounceDiv} = bounceDiv.getBoundingClientRect();
                 
                 for(let i=0;i<ballsNumber;i++){
-                    let newCircle = new Circle(widthBounceDiv,heightBounceDiv,leftBounceDiv,topBounceDiv)
+                    const newCircle = new Circle(createCircleDomElement(),widthBounceDiv,heightBounceDiv,leftBounceDiv,topBounceDiv)
                     circlesElements.push(newCircle)
-                    addCircleToDom(newCircle,bounceDiv)
+                    addCircleToDom(newCircle.dom,bounceDiv)
                 }
                 
         
                 bounceInterval = setInterval(()=>{
-                    let {top:topBounceDiv,left:leftBounceDiv,bottom:bottomBounceDiv,right:rightBounceDiv} = bounceDiv.getBoundingClientRect();
+                    console.log("Hello")
+                    const {top:topBounceDiv,left:leftBounceDiv,bottom:bottomBounceDiv,right:rightBounceDiv} = bounceDiv.getBoundingClientRect();
                     circlesElements.forEach((circle)=>{
                         circle.moveCircle(leftBounceDiv,rightBounceDiv,topBounceDiv,bottomBounceDiv)
+                        updateCirclePositionInDom(circle.dom,circle.x,circle.y)
                     })
-                },animationInterval)
+                },SIXTY_FPS)
                 isStartButtonEnable = !isStartButtonEnable
             } else {
                 this.innerText = "Bounce"
                 clearInterval(bounceInterval)
-                let removeInterval = setInterval(function(){
+                const removeInterval = setInterval(function(){
                     circlesElements.forEach((circle)=>{
                         circle.scaleDown()
-                    
+                        updateCircleRadiusInDom(circle.dom,circle.circleRadius)
+                        updateCirclePositionInDom(circle.dom,circle.x,circle.y)
                     })
                     circlesElements = circlesElements.filter((circle)=>{
                         if(circle.circleRadius > 10)
                         {
                             return true;
                         } else {
-                            removeCircleFromDom(circle,bounceDiv)
+                            removeCircleFromDom(circle.dom)
                             return false;
                         }
                     })
@@ -57,7 +62,7 @@ const startWrapper = (function(){
                         clearInterval(removeInterval)
                     }
         
-                },animationInterval)
+                },SIXTY_FPS)
             }    
         });        
     }
