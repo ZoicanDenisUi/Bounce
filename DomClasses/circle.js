@@ -1,13 +1,14 @@
 import { randomIntFromInterval } from "../Helpers/mathHelper.js"
 
 export class Circle {
-    constructor(dom,width,height,left,top){
+    constructor(dom,circleRadius,width,height,left,top){
         this.step = randomIntFromInterval(1,10),
         this.direction = randomIntFromInterval(0,1),
         this.slope = Math.random()
 
         this.dom = dom
-        this.circleRadius = parseInt(dom.style.width)
+        this.circleRadius = circleRadius
+        
 
         this.x = left+randomIntFromInterval(0,width-this.circleRadius)
         this.y = top+randomIntFromInterval(0,height-this.circleRadius)

@@ -1,4 +1,5 @@
 import {Circle} from './DomClasses/circle.js'
+import { randomIntFromInterval } from './Helpers/mathHelper.js'
 import { removeCircleFromDom, createCircleDomElement ,addCircleToDom, initialize,updateCirclePositionInDom,updateCircleRadiusInDom } from './DomClasses/domInteractions.js'
 // Start button logic
 
@@ -23,7 +24,8 @@ const startWrapper = (function(){
                 const {width:widthBounceDiv,height:heightBounceDiv,left:leftBounceDiv,top:topBounceDiv} = bounceDiv.getBoundingClientRect();
                 
                 for(let i=0;i<ballsNumber;i++){
-                    const newCircle = new Circle(createCircleDomElement(),widthBounceDiv,heightBounceDiv,leftBounceDiv,topBounceDiv)
+                    const circleRadius = randomIntFromInterval(40,100)
+                    const newCircle = new Circle(createCircleDomElement(circleRadius),circleRadius,widthBounceDiv,heightBounceDiv,leftBounceDiv,topBounceDiv)
                     circlesElements.push(newCircle)
                     addCircleToDom(newCircle.dom,bounceDiv)
                 }

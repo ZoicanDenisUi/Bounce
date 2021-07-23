@@ -25,9 +25,8 @@ export function updateCircleRadiusInDom(circleDom,newRadius){
 }
 
 
-export function createCircleDomElement(){
+export function createCircleDomElement(circleRadius){
 
-    const circleRadius = randomIntFromInterval(40,100)
     const gradientDirection = randomIntFromInterval(0,360)
     
     const colorRed1 = randomIntFromInterval(0,255)
