@@ -1,7 +1,21 @@
 import { randomIntFromInterval } from "../Helpers/mathHelper.js"
 
+export enum Direction {
+    Left,
+    Right
+}
+
 export class Circle {
-    constructor(dom,circleRadius,width,height,left,top){
+    
+    step:number
+    direction:Direction
+    slope:number
+    dom:HTMLDivElement
+    circleRadius:number
+    x:number
+    y:number
+
+    constructor(dom:HTMLDivElement,circleRadius:number,width:number,height:number,left:number,top:number){
         this.step = randomIntFromInterval(1,10),
         this.direction = randomIntFromInterval(0,1),
         this.slope = Math.random()
@@ -15,10 +29,10 @@ export class Circle {
 
     }
 
-    scaleDown(){
-        const newRadius = (this.circleRadius-2)
-        const newX = this.x+1
-        const newY = this.y+1
+    scaleDown():void{
+        const newRadius:number = (this.circleRadius-2)
+        const newX:number = this.x+1
+        const newY:number = this.y+1
 
         this.circleRadius = newRadius
 
@@ -26,11 +40,12 @@ export class Circle {
         this.y = newY
         
     }
-    moveCircle(left,right,top,bottom){
+
+    moveCircle(left:number,right:number,top:number,bottom:number):void{
 
         // Calculate new x, y, slope and direction
-        const circleRadius = this.circleRadius
-        const direction = this.direction
+        const circleRadius:number = this.circleRadius
+        const direction:number = this.direction
         
         if(direction == 0){
             this.x += this.step

@@ -1,17 +1,18 @@
-import {Circle} from './DomClasses/circle.js'
-import { randomIntFromInterval } from './Helpers/mathHelper.js'
-import { removeCircleFromDom, createCircleDomElement ,addCircleToDom, initialize,updateCirclePositionInDom,updateCircleRadiusInDom } from './DomClasses/domInteractions.js'
+import { initialize, createCircleDomElement, addCircleToDom, updateCirclePositionInDom, updateCircleRadiusInDom, removeCircleFromDom } from "./Helpers/domInteractions.js"
+import { randomIntFromInterval } from "./Helpers/mathHelper.js"
+import { Circle } from "./HelpingClasses/circle.js"
+
 // Start button logic
 
-initialize(document.getElementById("bounceDiv"));
+initialize(document.querySelector("#bounceDiv")!);
 
 
 (function (){
-    let isStartButtonEnable = true
-    let bounceInterval 
-    let circlesElements = []
-    const bounceDiv = document.getElementById("bounceDiv")
-    const ballCountInput = document.getElementById("ballCountInput")
+    let isStartButtonEnable:boolean = true
+    let bounceInterval:number
+    let circlesElements:Circle[] = []
+    const bounceDiv:HTMLDivElement = document.querySelector("#bounceDiv")!
+    const ballCountInput:HTMLInputElement = document.querySelector("#ballCountInput")!
 
     const SIXTY_FPS = 1000/60
 
@@ -24,7 +25,7 @@ initialize(document.getElementById("bounceDiv"));
             const circleRadius = randomIntFromInterval(40,100)
             const newCircle = new Circle(createCircleDomElement(circleRadius),circleRadius,widthBounceDiv,heightBounceDiv,leftBounceDiv,topBounceDiv)
             circlesElements.push(newCircle)
-            addCircleToDom(newCircle.dom,bounceDiv)
+            addCircleToDom(newCircle.dom)
         }
     }
 
@@ -58,7 +59,9 @@ initialize(document.getElementById("bounceDiv"));
         })
     }
 
-    document.getElementById("startButton").addEventListener("click", function(){
+    const startButton:HTMLButtonElement = document.querySelector("#startButton")!
+    
+    startButton.addEventListener("click", function(){
         if(isStartButtonEnable){
             isStartButtonEnable = false
             this.innerText = "Stop"
@@ -83,7 +86,6 @@ initialize(document.getElementById("bounceDiv"));
             },SIXTY_FPS)
         }    
     });        
-
 })()
 
 
@@ -100,7 +102,8 @@ const bounceAnimation = [
 {color: 'coral'}
 ];
 
-document.getElementById("title").addEventListener("click", function(){
+const titleLabel:HTMLLabelElement = document.querySelector("#title")!
+titleLabel.addEventListener("click", function(){
     this.animate(bounceAnimation, {
         duration: 2000,
         iterations: 3
