@@ -76,7 +76,7 @@ initialize(document.getElementById("bounceDiv"));
                 circlesElements = removeSmallCircles()
     
                 if(circlesElements.length === 0){
-                    isStartButtonEnable = !isStartButtonEnable
+                    isStartButtonEnable = true
                     clearInterval(removeInterval)
                 }
     
