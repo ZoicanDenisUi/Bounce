@@ -16,13 +16,15 @@
 #startButton{
     display:block;
     margin:1rem auto;
+    width:4rem
 }
 
 .circle{
-    background-color: red;
     border-radius: 100%;
-    position:absolute
+    position: absolute;
 }
+
+
 
 
 #bounceDiv{
