@@ -3,10 +3,10 @@ import { randomIntFromInterval } from './Helpers/mathHelper.js'
 import { removeCircleFromDom, createCircleDomElement ,addCircleToDom, initialize,updateCirclePositionInDom,updateCircleRadiusInDom } from './DomClasses/domInteractions.js'
 // Start button logic
 
-initialize(document.getElementById("bounceDiv"))
+initialize(document.getElementById("bounceDiv"));
 
-const startWrapper = (function(){
 
+(function (){
     let isStartButtonEnable = true
     let bounceInterval 
     let circlesElements = []
@@ -15,60 +15,78 @@ const startWrapper = (function(){
 
     const SIXTY_FPS = 1000/60
 
-    return function(){
-        document.getElementById("startButton").addEventListener("click", function(){
-            if(isStartButtonEnable){
-                this.innerText = "Stop"
-                const ballsNumber = parseInt(ballCountInput.value)
+    function createCirclesInDom(){
+        const ballsNumber = parseInt(ballCountInput.value)
+    
+        const {width:widthBounceDiv,height:heightBounceDiv,left:leftBounceDiv,top:topBounceDiv} = bounceDiv.getBoundingClientRect();
         
-                const {width:widthBounceDiv,height:heightBounceDiv,left:leftBounceDiv,top:topBounceDiv} = bounceDiv.getBoundingClientRect();
-                
-                for(let i=0;i<ballsNumber;i++){
-                    const circleRadius = randomIntFromInterval(40,100)
-                    const newCircle = new Circle(createCircleDomElement(circleRadius),circleRadius,widthBounceDiv,heightBounceDiv,leftBounceDiv,topBounceDiv)
-                    circlesElements.push(newCircle)
-                    addCircleToDom(newCircle.dom,bounceDiv)
-                }
-                
-        
-                bounceInterval = setInterval(()=>{
-                    console.log("Hello")
-                    const {top:topBounceDiv,left:leftBounceDiv,bottom:bottomBounceDiv,right:rightBounceDiv} = bounceDiv.getBoundingClientRect();
-                    circlesElements.forEach((circle)=>{
-                        circle.moveCircle(leftBounceDiv,rightBounceDiv,topBounceDiv,bottomBounceDiv)
-                        updateCirclePositionInDom(circle.dom,circle.x,circle.y)
-                    })
-                },SIXTY_FPS)
-                isStartButtonEnable = !isStartButtonEnable
-            } else {
-                this.innerText = "Bounce"
-                clearInterval(bounceInterval)
-                const removeInterval = setInterval(function(){
-                    circlesElements.forEach((circle)=>{
-                        circle.scaleDown()
-                        updateCircleRadiusInDom(circle.dom,circle.circleRadius)
-                        updateCirclePositionInDom(circle.dom,circle.x,circle.y)
-                    })
-                    circlesElements = circlesElements.filter((circle)=>{
-                        if(circle.circleRadius > 10)
-                        {
-                            return true;
-                        } else {
-                            removeCircleFromDom(circle.dom)
-                            return false;
-                        }
-                    })
-        
-                    if(!circlesElements.length){
-                        isStartButtonEnable = !isStartButtonEnable
-                        clearInterval(removeInterval)
-                    }
-        
-                },SIXTY_FPS)
-            }    
-        });        
+        for(let i=0;i<ballsNumber;i++){
+            const circleRadius = randomIntFromInterval(40,100)
+            const newCircle = new Circle(createCircleDomElement(circleRadius),circleRadius,widthBounceDiv,heightBounceDiv,leftBounceDiv,topBounceDiv)
+            circlesElements.push(newCircle)
+            addCircleToDom(newCircle.dom,bounceDiv)
+        }
     }
-})()()
+
+    function movesCirclesAtInterval(){
+        bounceInterval = setInterval(()=>{
+            const {top:topBounceDiv,left:leftBounceDiv,bottom:bottomBounceDiv,right:rightBounceDiv} = bounceDiv.getBoundingClientRect();
+            circlesElements.forEach((circle)=>{
+                circle.moveCircle(leftBounceDiv,rightBounceDiv,topBounceDiv,bottomBounceDiv)
+                updateCirclePositionInDom(circle.dom,circle.x,circle.y)
+            })
+        },SIXTY_FPS)
+    }
+
+    function scaleDownCircles(){
+        circlesElements.forEach((circle)=>{
+            circle.scaleDown()
+            updateCircleRadiusInDom(circle.dom,circle.circleRadius)
+            updateCirclePositionInDom(circle.dom,circle.x,circle.y)
+        })
+    }
+
+    function removeSmallCircles(){
+        return circlesElements.filter((circle)=>{
+            if(circle.circleRadius > 10)
+            {
+                return true;
+            } else {
+                removeCircleFromDom(circle.dom)
+                return false;
+            }
+        })
+    }
+
+    document.getElementById("startButton").addEventListener("click", function(){
+        if(isStartButtonEnable){
+            isStartButtonEnable = false
+            this.innerText = "Stop"
+
+            createCirclesInDom()
+            movesCirclesAtInterval()
+            
+        } else {
+            this.innerText = "Bounce"
+            clearInterval(bounceInterval)
+            const removeInterval = setInterval(function(){
+                
+                scaleDownCircles()
+
+                circlesElements = removeSmallCircles()
+    
+                if(circlesElements.length === 0){
+                    isStartButtonEnable = !isStartButtonEnable
+                    clearInterval(removeInterval)
+                }
+    
+            },SIXTY_FPS)
+        }    
+    });        
+
+})()
+
+
 
 
 
