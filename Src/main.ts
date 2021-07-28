@@ -102,11 +102,17 @@ const bounceAnimation = [
 {color: 'coral'}
 ];
 
+let canAnimateTitle:boolean = true
 const titleLabel:HTMLLabelElement = document.querySelector("#title")!
 titleLabel.addEventListener("click", function(){
-    this.animate(bounceAnimation, {
-        duration: 2000,
-        iterations: 3
-      });
+    if(canAnimateTitle){
+        canAnimateTitle=false
+        this.animate(bounceAnimation, {
+            duration: 2000,
+            iterations: 3
+          }).finished.then(()=>{
+              canAnimateTitle = true
+          })
+    }
     
 });
