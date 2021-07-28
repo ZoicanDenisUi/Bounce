@@ -113,6 +113,5 @@ titleLabel.addEventListener("click", function(){
           }).finished.then(()=>{
               canAnimateTitle = true
           })
-    }
-    
+    }  
 });
