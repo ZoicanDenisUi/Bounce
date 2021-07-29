@@ -26,5 +26,5 @@ Be sure that the port 8080 is not used.
 How to compile
 
 1. Make changes in code.
-2. Enter the command "npm run compile".
+2. Enter the command "npm run build".
 

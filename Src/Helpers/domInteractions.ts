@@ -1,4 +1,4 @@
-import { randomIntFromInterval } from './mathHelper.js'
+import { randomIntFromInterval } from './mathHelper'
 
 let parentDiv:HTMLDivElement
 
