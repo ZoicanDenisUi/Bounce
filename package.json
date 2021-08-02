@@ -5,7 +5,8 @@
   "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "live-server ."
+    "start": "live-server bin",
+    "compile": "concurrently --kill-others \"tsc -w\" \"live-server bin\""
   },
   "repository": {
     "type": "git",
@@ -18,6 +19,8 @@
   },
   "homepage": "https://github.com/ZoicanDenisUi/Bounce#readme",
   "devDependencies": {
-    "live-server": "^1.2.1"
+    "concurrently": "^6.2.0",
+    "live-server": "^1.2.1",
+    "typescript": "^4.3.5"
   }
 }

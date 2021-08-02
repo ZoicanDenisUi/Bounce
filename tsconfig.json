@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "target": "es6",                                
+    "module": "es2015",                          
+    "outDir": "bin",                       
+    "rootDir": "src",                            
+    "strict": true                                
+  },
+  "include": ["src"]
+}

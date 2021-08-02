@@ -18,5 +18,8 @@ Be sure that the port 8080 is not used.
 6. To stop the server from running you can use CTRL+C
 
 
+How to compile
 
+1. Make changes in code.
+2. Enter the command "npm run compile".
 
