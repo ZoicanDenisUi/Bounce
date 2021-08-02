@@ -1,4 +1,4 @@
-import { randomIntFromInterval } from "../Helpers/mathHelper.js"
+import { randomIntFromInterval } from "../helpers/mathHelper.js"
 
 export enum Direction {
     Left,

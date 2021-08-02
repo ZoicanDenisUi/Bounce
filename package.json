@@ -5,8 +5,8 @@
   "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "live-server Public",
-    "compile": "concurrently --kill-others \"tsc -w\" \"live-server Public\""
+    "start": "live-server bin",
+    "compile": "concurrently --kill-others \"tsc -w\" \"live-server bin\""
   },
   "repository": {
     "type": "git",

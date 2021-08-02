@@ -2,9 +2,9 @@
   "compilerOptions": {
     "target": "es6",                                
     "module": "es2015",                          
-    "outDir": "./Public",                       
-    "rootDir": "./Src",                            
+    "outDir": "bin",                       
+    "rootDir": "src",                            
     "strict": true                                
   },
-  "include": ["./Src"]
+  "include": ["src"]
 }
