@@ -10,22 +10,17 @@ export class Circle {
     step:number
     direction:Direction
     slope:number
-    dom:HTMLDivElement
-    circleRadius:number
     x:number
     y:number
 
-    constructor(dom:HTMLDivElement,circleRadius:number,width:number,height:number,left:number,top:number){
+    constructor(public dom:HTMLDivElement,public circleRadius:number,width:number,height:number,left:number,top:number){
         this.step = randomIntFromInterval(1,10),
         this.direction = randomIntFromInterval(0,1),
         this.slope = Math.random()
-
-        this.dom = dom
-        this.circleRadius = circleRadius
         
 
-        this.x = left+randomIntFromInterval(0,width-this.circleRadius)
-        this.y = top+randomIntFromInterval(0,height-this.circleRadius)
+        this.x = left+randomIntFromInterval(0,width-circleRadius)
+        this.y = top+randomIntFromInterval(0,height-circleRadius)
 
     }
 

@@ -9,7 +9,7 @@ initialize(document.querySelector("#bounceDiv")!);
 
 (function (){
     let isStartButtonEnable:boolean = true
-    let bounceInterval:number
+    let bounceInterval:any
     let circlesElements:Circle[] = []
     const bounceDiv:HTMLDivElement = document.querySelector("#bounceDiv")!
     const ballCountInput:HTMLInputElement = document.querySelector("#ballCountInput")!
