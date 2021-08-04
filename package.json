@@ -7,8 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "live-server bin",
     "compile": "concurrently --kill-others \"tsc -w\" \"live-server bin\"",
-    "lint": "npx eslint .\\Src\\**\\*.ts",
-    "lintAndFix": "npx eslint .\\Src\\**\\*.ts --fix"
+    "lint": "eslint .\\src\\**\\*.ts",
+    "lintAndFix": "eslint .\\src\\**\\*.ts --fix"
   },
   "repository": {
     "type": "git",

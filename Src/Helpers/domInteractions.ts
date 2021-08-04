@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/extensions
 import { randomIntFromInterval } from './mathHelper.js'
 
 let parentDiv:HTMLDivElement
@@ -8,9 +7,7 @@ export function initialize (newDiv:HTMLDivElement) {
 }
 
 export function updateCirclePositionInDom (circleDom:HTMLDivElement, x:number, y:number) {
-  // eslint-disable-next-line no-param-reassign
   circleDom.style.left = `${x}px`
-  // eslint-disable-next-line no-param-reassign
   circleDom.style.top = `${y}px`
 }
 
@@ -23,9 +20,7 @@ export function removeCircleFromDom (circleDom:HTMLDivElement) {
 }
 
 export function updateCircleRadiusInDom (circleDom:HTMLDivElement, newRadius:number) {
-  // eslint-disable-next-line no-param-reassign
   circleDom.style.width = `${newRadius}px`
-  // eslint-disable-next-line no-param-reassign
   circleDom.style.height = `${newRadius}px`
 }
 

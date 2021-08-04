@@ -1,6 +1,6 @@
-import { initialize, createCircleDomElement, addCircleToDom, updateCirclePositionInDom, updateCircleRadiusInDom, removeCircleFromDom } from './Helpers/domInteractions.js'
-import { randomIntFromInterval } from './Helpers/mathHelper.js'
-import { Circle } from './HelpingClasses/circle.js'
+import { initialize, createCircleDomElement, addCircleToDom, updateCirclePositionInDom, updateCircleRadiusInDom, removeCircleFromDom } from './helpers/domInteractions.js'
+import { randomIntFromInterval } from './helpers/mathHelper.js'
+import { Circle } from './helpingClasses/circle.js'
 
 // Start button logic
 
