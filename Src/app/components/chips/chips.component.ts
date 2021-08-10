@@ -25,7 +25,6 @@ export class ChipsComponent {
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
 
-    // Add our fruit
     if(this.categories.length > 2){
       alert("Too many tags!")
     } else if(value === '') {
@@ -34,14 +33,13 @@ export class ChipsComponent {
       this.categories.push(value);
     } 
 
-    // Clear the input value
     event.chipInput!.clear();
     this.categoryEventEmitter.emit(this.categories)
 
   }
 
-  remove(fruit: string): void {
-    const index = this.categories.indexOf(fruit);
+  remove(tag: string): void {
+    const index = this.categories.indexOf(tag);
 
     if (index >= 0) {
       this.categories.splice(index, 1);

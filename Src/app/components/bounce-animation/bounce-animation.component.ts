@@ -134,6 +134,32 @@ export class BounceAnimationComponent implements AfterViewInit{
     })
   }
 
+  moveBalls(){
+    this.bounceInterval = setInterval(()=>{
+        const {left:leftBounceDiv,right:rightBounceDiv,top:topBounceDiv,bottom:bottomBounceDiv} = this.domInteractions.getDomValues(this.bounceDiv.nativeElement);
+
+        if(this.circlesElements.length == 0){
+            clearInterval(this.bounceInterval)
+            this.roundObserver.next(new Round(this.ballCountInput,this.ballClickedCount,this.timeInSeconds,new Date()))
+            this.currentStateOfAnimation = AnimationState.startAnimation
+            this.resetGameValues()
+        }
+
+        
+        this.circlesElements = this.circlesElements.filter((circle) => this.applyAction(circle))
+
+        this.circlesElements.forEach((circle)=>{
+            circle.moveCircle(leftBounceDiv,rightBounceDiv,topBounceDiv,bottomBounceDiv)
+            this.domInteractions.updateCirclePositionInDom(circle.dom,circle.x,circle.y)
+        })
+
+
+        this.intervalsPassed++
+        this.timeInSeconds =  this.intervalsPassed/this.FRAMSECOUNT | 0
+
+    },this.SIXTY_FPS)
+  }
+
   ngAfterViewInit(){
       this.domInteractions.initialize(document.querySelector('#bounceDiv')!);
   }
@@ -146,30 +172,7 @@ export class BounceAnimationComponent implements AfterViewInit{
 
             this.resetGameValues()
             this.createCirclesInDom()
-
-            this.bounceInterval = setInterval(()=>{
-                const {left:leftBounceDiv,right:rightBounceDiv,top:topBounceDiv,bottom:bottomBounceDiv} = this.domInteractions.getDomValues(this.bounceDiv.nativeElement);
-
-                if(this.circlesElements.length == 0){
-                    clearInterval(this.bounceInterval)
-                    this.roundObserver.next(new Round(this.ballCountInput,this.ballClickedCount,this.timeInSeconds,new Date()))
-                    this.currentStateOfAnimation = AnimationState.startAnimation
-                    this.resetGameValues()
-                }
-
-                
-                this.circlesElements = this.circlesElements.filter((circle) => this.applyAction(circle))
-
-                this.circlesElements.forEach((circle)=>{
-                    circle.moveCircle(leftBounceDiv,rightBounceDiv,topBounceDiv,bottomBounceDiv)
-                    this.domInteractions.updateCirclePositionInDom(circle.dom,circle.x,circle.y)
-                })
-
-
-                this.intervalsPassed++
-                this.timeInSeconds =  this.intervalsPassed/this.FRAMSECOUNT | 0
-
-            },this.SIXTY_FPS)
+            this.moveBalls()
         } 
         else if(this.currentStateOfAnimation === AnimationState.stopAnimation){
             this.currentStateOfAnimation = AnimationState.idle
