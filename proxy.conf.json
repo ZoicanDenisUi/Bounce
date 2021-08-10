@@ -1,0 +1,7 @@
+{
+    "/random": {
+      "target": "https://source.unsplash.com",
+      "secure": false
+    },
+    "changeOrigin": true
+  }

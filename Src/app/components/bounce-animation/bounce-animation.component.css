@@ -1,0 +1,92 @@
+
+#startButton{
+    display:block;
+    margin:auto auto;
+    width:2.5rem;
+    height:2.5rem;
+    background-color: coral;
+}
+
+#startButton mat-icon {
+    font-size:1.5rem;
+    transform: translateY(-0.6rem) translateX(0.01rem);
+}
+
+
+
+#bounceDiv{
+    border:1px solid coral;
+    width:80%;
+    height:30rem;
+    margin-left:10%;
+    background-color: rgb(240, 240, 240);
+}
+
+#roundInfoDiv{
+    margin-bottom: 2%;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+}
+
+#ballCountDiv{
+    width:30%;
+    justify-content: center;
+    margin:2rem auto 1rem auto;
+    display:flex;
+}
+
+#ballCountLabel{
+    margin-right:1rem;
+}
+
+#ballCountInput{
+    width:20%;
+}
+
+#progressDiv{
+    display: flex;
+    justify-content: flex-end;
+}
+
+#roundInfoDiv{
+    margin-bottom: 2%;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+}
+
+#progressBar {
+    height:0.5rem;
+    margin:0.5rem 15%;
+    color:coral;
+    width:40%;
+    border:1px solid coral;
+}
+
+#infoDiv{
+    display: flex;
+    justify-content: center;
+}
+
+@media screen and (max-width: 750px) {
+    #infoDiv {
+      flex-direction: column;
+      align-items:center;
+      display: flex;
+    }
+
+    #timeLabel{
+        margin-top:1rem;
+    }    
+}
+
+#ballsCountLabel{
+    background-color: coral;
+    margin-right: 2rem;
+    font-size:2rem;
+}
+
+#timeLabel{
+    background-color: coral;
+    font-size:2rem;
+    margin-right:3rem;
+}

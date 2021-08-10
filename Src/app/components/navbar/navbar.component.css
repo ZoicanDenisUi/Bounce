@@ -1,0 +1,46 @@
+#navbar{
+    justify-content:space-evenly;
+    display:flex;
+    background-color: coral;
+}
+
+#pagesDiv{
+    display:flex;
+    justify-content: space-evenly;
+    width:100%;
+}
+
+#toggleIcon{
+    transform: translateY(3px);
+    color:white;
+    margin-right:1rem;
+    color:white; 
+    text-shadow: rgb(65, 65, 65) 2px 2px 2px;
+}
+
+#logo{
+    display: flex;
+    justify-content: flex-start;
+    width:100%
+}
+
+#logoImage:hover{
+    cursor: pointer;
+}
+
+#logoImage{
+    width:3rem;
+    height:3rem;
+}
+
+.routeLabel{
+    transition:1.2s;
+    font-weight:400
+}
+
+.currentRoute{
+    color:rgb(65, 65, 65);
+    transform:scale(1.1);
+    font-weight:900;
+    text-shadow: white 1px 1px 1px;
+}

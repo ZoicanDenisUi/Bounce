@@ -1,0 +1,1 @@
+1. .circle in styles.css and not in app.component.css

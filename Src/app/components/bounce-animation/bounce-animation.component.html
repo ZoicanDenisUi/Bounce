@@ -1,0 +1,21 @@
+<div id="ballCountDiv">
+    <label id="ballCountLabel">How many balls? </label>
+    <input type="number" id="ballCountInput" [ngModel]="ballCountInput | makePositive" (ngModelChange)="ballCountInput=$event">
+</div>
+<div *ngIf="isNewMode">
+    <app-chips (categoryEventEmitter)="getCategories($event)"></app-chips>
+</div>
+<button #bounceButton id="startButton" mat-fab color="primary" aria-label="Example icon button with a delete icon" (click)="animateBalls()">
+    <mat-icon>{{buttonStateIcons[currentStateOfAnimation]}}</mat-icon>
+</button>
+<div id="roundInfoDiv">
+    <div id="progressDiv">
+        <mat-progress-bar id="progressBar"  mode="determinate" [value]="ballClickedCount*100/ballCountInput"></mat-progress-bar>
+    </div>
+    <div id="infoDiv">
+        <label id="ballsCountLabel">{{currentStateOfAnimation===0?"-":ballClickedCount}} / {{currentStateOfAnimation===0?"-":ballCountInput}}</label> 
+        <label id="timeLabel"> {{currentStateOfAnimation===0?"-":timeInSeconds}} </label>
+    </div>
+</div>
+<div #bounceDiv id="bounceDiv" ></div>
+

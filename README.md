@@ -1,30 +1,27 @@
-# Bounce
-Bounce project made using JavaScript
+# BounceAngular
 
-Installation
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.2.
 
-1. Open a terminal in the Bounce folder
-2. Enter the command "npm install" to install all the necessary dependencies
+## Development server
 
-Making changes to the code
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-1. Make changes to the  code.
-2. Run "npm run compile" to compile the Typescript code and run the application in order to see the changes.
+## Code scaffolding
 
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-How to use
+## Build
 
-1. Enter the command "npm start" to open the web page. This will start a server that will run on port 8080.
-Be sure that the port 8080 is not used.
-2. Enter how many balls you want to see bouncing on the screen
-3. Click the "Bounce" button
-4. Enjoy
-5. To stop de balls from bouncing you need to click the "Stop" button
-6. To stop the server from running you can use CTRL+C
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
+## Running unit tests
 
-How to compile
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-1. Make changes in code.
-2. Enter the command "npm run build".
+## Running end-to-end tests
 
+Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+
+## Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
