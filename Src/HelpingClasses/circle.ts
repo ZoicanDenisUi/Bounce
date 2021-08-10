@@ -1,4 +1,4 @@
-import { randomIntFromInterval } from '../helpers/mathHelper.js'
+import { randomIntFromInterval } from '../helpers/mathHelper'
 
 export class Circle {
     step:number
