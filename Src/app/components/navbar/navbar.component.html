@@ -1,0 +1,12 @@
+<mat-toolbar color="primary" id="navbar">
+    <div id="logo" ><img appExpandOnHover style="transition:1.2s" [enable]="true" routerLink="" id="logoImage" src=".../../../../assets/media/logo.png"></div>
+    <div id="pagesDiv">
+        <label routerLink="" class="routeLabel" [ngClass]="{'currentRoute': this.location.path() === ''}" appExpandOnHover [enable]="this.location.path() !== ''" routerLinkActive="active">Home</label>
+        <label routerLink="/about" class="routeLabel" [ngClass]="{'currentRoute': this.location.path() === '/about'}" appExpandOnHover [enable]="this.location.path() !== '/about'" routerLinkActive="active">About</label>
+        <label (click)="showTop()" class="routeLabel" appExpandOnHover [enable]="this.location.path() !== '/top'">Top</label>
+        <div id="toggleDiv">
+            <mat-icon aria-hidden="false" id="toggleIcon" aria-label="Example home icon">{{isNormal?"texture":"photo_library"}}</mat-icon>
+            <mat-slide-toggle id="toggle" (change)="toggle($event)" [(ngModel)]="isNormal"></mat-slide-toggle>
+        </div>
+    </div>
+</mat-toolbar>

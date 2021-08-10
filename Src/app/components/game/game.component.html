@@ -1,0 +1,11 @@
+<div>
+    <div id="titleDiv">
+        <label (click)="animateTitle()" #title id="title">Bounce</label>
+    </div>
+    <p id="description">
+        If you want to relax and free your mind for a couple of minutes just stay here and watch the balls bounce away.
+    </p>        
+</div>
+
+<app-bounce-animation [roundObserver]="roundObserver"></app-bounce-animation>
+<app-history [roundObserver]="roundObserver"></app-history>

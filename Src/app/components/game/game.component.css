@@ -1,0 +1,32 @@
+#title{
+    font-size:3rem;
+    color:rgb(44, 44, 44);
+    font-weight: 900;
+    text-shadow:coral 1px 1px 1px;
+    transition: 0.3s;
+    margin-top:2rem;
+}
+
+#titleDiv{
+    display: flex;
+    justify-content: center;
+}
+
+
+#title:hover{
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
+#description{
+    color:rgb(95, 47, 30);
+    margin-top:2rem;
+    text-align: center;
+    font-weight:900;
+    width:50%;
+    margin-left:25%;
+    background-color: rgb(240, 240, 240);
+    padding:1rem;
+    border-radius: 10px;
+    border:rgb(95, 47, 30) 1px solid;
+}

@@ -1,0 +1,19 @@
+#title{
+    text-align: center;
+    margin:3rem;
+    font-size:3rem;
+    color:rgb(44, 44, 44);
+    font-weight: 900;
+    text-shadow:coral 1px 1px 1px;
+}
+
+#about{
+    background-color: rgb(240, 240, 240);
+    font-size:1rem;
+    padding:1rem;
+    border-radius: 10px;
+    border:2px coral solid;
+    text-align: center;
+    width:50%;
+    margin:auto auto;
+}

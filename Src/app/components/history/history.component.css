@@ -1,0 +1,18 @@
+#historyTable{
+    margin:1rem auto;
+    padding:10px;
+    border:2px solid rgb(10, 10, 10);
+    border-collapse: collapse;
+
+}
+
+td,th {
+    border:1px solid black;
+    padding:5px;
+    text-align: center;
+}
+
+tr:nth-child(even){
+    background-color: coral
+    
+}
